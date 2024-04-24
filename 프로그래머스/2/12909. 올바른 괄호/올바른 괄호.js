@@ -1,14 +1,13 @@
 function solution(s){
     var answer = true;
-    let sum = 0;
-    [...s].forEach(function(value){
-        if(sum < 0) answer = false;
-        if(value === "("){
-            sum++
-        }else{
-            sum--
+    let stack = []
+    for(let x of s){
+        if(x === "(") stack.push(x)
+        else{
+            if(stack.length === 0) return false;
+            stack.pop();
         }
-    })
-    if(sum !== 0) answer = false;
+    }
+    if(stack.length > 0) answer = false
     return answer;
 }
