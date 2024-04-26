@@ -1,26 +1,27 @@
 function solution(progresses, speeds) {
     var answer = [];
-    var stack = []
-    progresses.forEach((value, index) => {
-        let progress = value;
-        let day = 0;
-        while (progress < 100) {
-            progress += speeds[index]
-                day++;
+    let completeArr = []
+    let cnt = 0;
+    for(let i = 0; i < progresses.length; i++){
+        cnt = 0;
+        while(progresses[i] < 100){
+            progresses[i] += speeds[i]
+            cnt++
         }
-        stack.push(day)
- });
-    while (stack.length > 0) {
-        let complete = 1;
-        let current = stack.shift();
-        
-        while (stack.length > 0 && current >= stack[0]) {
-            stack.shift();
-            complete++;
-        }
-        
-        answer.push(complete);
+        completeArr.push(cnt)
     }
-
+    cnt = 1;
+    let max = completeArr[0];
+    for(let i = 1; i < completeArr.length; i++){
+        if(completeArr[i] <= max) cnt++
+        else{
+            answer.push(cnt)
+            cnt = 1;
+            max = completeArr[i]
+        }
+        if(i === completeArr.length -1) answer.push(cnt)
+    }
+    
+    
     return answer;
 }
