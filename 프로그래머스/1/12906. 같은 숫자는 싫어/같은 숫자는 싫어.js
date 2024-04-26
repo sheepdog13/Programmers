@@ -1,12 +1,15 @@
 function solution(arr)
 {
     var answer = [];
-    for(let i = 0; i < arr.length; i++){
-        if(arr[i-1] !== arr[i]){
-            answer.push(arr[i]);
-        }
+    let cur = arr[0];
+    answer.push(cur)
+    for(let x of arr){
+        if(cur !== x){
+            answer.push(x);
+            cur = x;
+        } 
     }
+
+    
     return answer;
-    
 }
-    
