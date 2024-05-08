@@ -15,17 +15,15 @@ function toggle(state) {
 
 function solution(n, state, studentNum, studentList) {
   for (let i = 0; i < studentNum; i++) {
-    let student = studentList[i];
-    let stuNum = student[1];
+    let gender = studentList[i][0];
+    let stuNum = studentList[i][1];
     // 남학생일때
-    if (student[0] === 1) {
-      if (stuNum > n) continue;
+    if (gender === 1) {
       for (let i = 0; i < parseInt(n / stuNum); i++) {
         let target = (i + 1) * stuNum - 1;
         state[target] = toggle(state[target]);
       }
     } else {
-      if (stuNum > n) continue;
       let flag = 0;
       state[stuNum - 1] = toggle(state[stuNum - 1]);
       let rt = stuNum;
@@ -41,14 +39,12 @@ function solution(n, state, studentNum, studentList) {
       }
     }
   }
-  let anwser = "";
-  state.forEach((v, i) => {
-    anwser += v + " ";
-    if ((i + 1) % 20 === 0) {
-      anwser += "\n";
-    }
-  });
-  console.log(anwser.trim());
+
+  let result = [];
+  while (state.length > 0) {
+    result.push(state.splice(0, 20).join(" "));
+  }
+  console.log(result.join("\n"));
 }
 
 solution(n, state, studentNum, studentList);
