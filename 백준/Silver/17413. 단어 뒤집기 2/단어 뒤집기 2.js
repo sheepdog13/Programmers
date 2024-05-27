@@ -29,24 +29,17 @@ function solution(s) {
   if (word.length) {
     words.push(word.join(""));
   }
-  let sortWords = [];
-  for (let x of words) {
-    if (x[0] === "<") {
-      sortWords.push(x);
-    } else {
-      sortWords.push(x.split(" "));
-    }
-  }
+
   let result = "";
-  for (let x of sortWords) {
+
+  for (let x of words) {
     if (x[0] === "<") {
       result += x;
     } else {
-      let a = [];
-      while (x.length) {
-        a.push(x.shift().split("").reverse().join(""));
-      }
-      result += a.join(" ");
+      result += x
+        .split(" ")
+        .map((word) => word.split("").reverse().join(""))
+        .join(" ");
     }
   }
   console.log(result);
